@@ -17,4 +17,6 @@ COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
 EXPOSE 8080
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["ttyd", "-p", "8080", "java", "-jar", "/app/game.jar"]
+
+# JETZT ABSOLUT RICHTIG: Das "-I" schaltet die iFrame-Eingabe auf Java 21 scharf!
+CMD ["ttyd", "-p", "8080", "-I", "java", "-jar", "/app/game.jar"]
