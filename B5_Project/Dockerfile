@@ -1,4 +1,3 @@
-dockerfile
 # Wir nutzen das ttyd-Image für das Terminal und das stabile Java 21 Standard-Image
 FROM tsl0922/ttyd:latest AS ttyd
 FROM eclipse-temurin:21-jre-alpine
