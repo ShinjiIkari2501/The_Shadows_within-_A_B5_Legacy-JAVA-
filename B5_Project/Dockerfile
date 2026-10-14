@@ -1,8 +1,8 @@
 # 1. Stufe: Wir holen uns das fertige Terminal-Binary aus dem ttyd-Image
 FROM tsl0922/ttyd:latest AS ttyd
 
-# 2. Stufe: Wir nutzen das stabile Ubuntu-basierte Java 25 Image
-FROM eclipse-temurin:25-jdk
+# 2. Stufe: Wir nutzen das stabile, Ubuntu-basierte Java 21 Image (Exakt passend zu deinem IntelliJ!)
+FROM eclipse-temurin:21-jdk
 
 # Installiert die notwendigen Web-System-Bibliotheken für ttyd unter Ubuntu
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -16,7 +16,7 @@ COPY --from=ttyd /usr/bin/ttyd /usr/bin/ttyd
 # Arbeitsverzeichnis im Container festlegen
 WORKDIR /app
 
-# Kopiert deine originale Spieldatei aus dem artifacts-Ordner
+# Kopiert deine originale Java-21-Spieldatei
 COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
 
 # Port-Freigabe für Render
