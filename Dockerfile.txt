@@ -12,12 +12,13 @@ RUN apk add --no-cache libuv tini
 
 WORKDIR /app
 
-# Kopiert deine originale Spieldatei aus dem artifacts-Ordner
-COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
+# KORREKTUR: Universeller Suchpfad! Sucht rekursiv nach JEDER .jar im Projekt, 
+# völlig egal ob sie in out/artifacts, artifacts oder direkt im Hauptordner liegt.
+COPY **/B5_Project.jar /app/game.jar
 
 # Port-Freigabe für Render
 EXPOSE 8080
 
-# Tini sorgt für ein stabiles Starten im Web mit iFrame-Eingabe (-I)
+# Tini sorgt für ein stabiles Starten im Web mit iFrame-Freigabe (-I)
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["ttyd", "-p", "8080", "-I", "java", "-jar", "/app/game.jar"]
