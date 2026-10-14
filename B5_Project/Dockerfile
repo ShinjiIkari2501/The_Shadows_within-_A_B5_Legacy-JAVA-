@@ -1,18 +1,21 @@
-# Nutzen der offiziellen Java-Umgebung
+# Wir nutzen ein fertiges Image, das Java 21 und das Web-Terminal ttyd bereits an Bord hat!
+FROM tsl0922/ttyd:latest AS ttyd
 FROM eclipse-temurin:21-jre-alpine
 
-# Installiert curl und lädt das fertige Web-Terminal Gotty über die korrekte Direkt-URL
-RUN apk add --no-cache curl \
-    && curl -sLk -o /tmp/gotty.tar.gz https://github.com \
-    && tar -xzf /tmp/gotty.tar.gz -C /usr/local/bin/ \
-    && rm /tmp/gotty.tar.gz
+# Kopiere das fertige Terminal-Binary aus dem ttyd-Image rüber
+COPY --from=ttyd /usr/bin/ttyd /usr/bin/ttyd
 
-# Arbeitsverzeichnis im Container festlegen
+# Notwendige System-Bibliotheken für das Terminal installieren
+RUN apk add --no-cache libuv tini
+
 WORKDIR /app
 
-# Kopiert deine JAR-Datei aus dem artifacts-Ordner
+# Kopiert deine Spieldatei aus dem artifacts-Ordner
 COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
 
 # Port-Freigabe für Render
 EXPOSE 8080
-CMD ["gotty", "-w", "-p", "8080", "java", "-jar", "/app/game.jar"]
+
+# Tini sorgt für ein sauberes Starten. ttyd lauscht auf Port 8080 und startet dein Java-Spiel
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["ttyd", "-p", "8080", "java", "-jar", "/app/game.jar"]
