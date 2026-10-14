@@ -9,7 +9,7 @@ RUN apk add --no-cache curl \
 WORKDIR /app
 
 # Kopiere deine exportierte JAR-Datei in den Container
-COPY out/artifacts/*/*.jar /app/game.jar
+COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
 
 # Render nutzt dynamische Ports. Gotty lauscht auf dem Port und startet dein Java-Spiel
 EXPOSE 8080
