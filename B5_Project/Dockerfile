@@ -1,16 +1,18 @@
-# Nutzen aus der offiziellen Java-Umgebung
+# Nutzen der offiziellen Java-Umgebung
 FROM eclipse-temurin:21-jre-alpine
 
-# Installiert das fertige Web-Terminal Gotty
+# Installiert curl und lädt das fertige Web-Terminal Gotty über die korrekte Direkt-URL
 RUN apk add --no-cache curl \
-    && curl -sLk https://github.com | tar xz -C /usr/local/bin
+    && curl -sLk -o /tmp/gotty.tar.gz https://github.com \
+    && tar -xzf /tmp/gotty.tar.gz -C /usr/local/bin/ \
+    && rm /tmp/gotty.tar.gz
 
 # Arbeitsverzeichnis im Container festlegen
 WORKDIR /app
 
-# Kopiere deine exportierte JAR-Datei in den Container
+# Kopiert deine JAR-Datei aus dem artifacts-Ordner
 COPY out/artifacts/B5_Project_jar/B5_Project.jar /app/game.jar
 
-# Render nutzt dynamische Ports. Gotty lauscht auf dem Port und startet dein Java-Spiel
+# Port-Freigabe für Render
 EXPOSE 8080
 CMD ["gotty", "-w", "-p", "8080", "java", "-jar", "/app/game.jar"]
