@@ -19,7 +19,7 @@ public class Main {
         // Da wir im Web-Modus sind, übergeben wir 'null' statt eines Scanners.
         switch (currentScene) {
             case "CREATION" -> printInitialSetup();
-            case "PROLOGUE" -> Scene1Prologue.execute(null); 
+            case "PROLOGUE" -> Scene1Prologue.execute(null);
             case "SCENE_2"  -> Scene2Spark.execute(state, null);
             case "SCENE_3"  -> Scene3Silence.execute(null);
             case "SCENE_4"  -> Scene4Negotiation.execute(state, null);
@@ -34,18 +34,18 @@ public class Main {
             case "SCENE_13" -> Scene13Draal.execute(state, null);
             case "SCENE_14" -> Scene14Medlab.execute(state, null);
             case "SCENE_15" -> Scene15Hub.execute(state, null);
-            
+
             // --- DIE VOLLE CHRONOLOGISCHE VERKNÜPFUNG (Szenen 16 bis 25) ---
-            case "SCENE_16" -> Scene16Sector.execute(state, null);
-            case "SCENE_17" -> Scene17Hyperspace.execute(state, null);
-            case "SCENE_18" -> Scene18Encounter.execute(state, null);
-            case "SCENE_19" -> Scene19Outpost.execute(state, null);
-            case "SCENE_20" -> Scene20Infiltration.execute(state, null);
-            case "SCENE_21" -> Scene21DataCore.execute(state, null);
-            case "SCENE_22" -> Scene22Escape.execute(state, null);
-            case "SCENE_23" -> Scene23Shadows.execute(state, null);
-            case "SCENE_24" -> Scene24Alliance.execute(state, null);
-            case "SCENE_25" -> Scene25Briefing.execute(state, null);
+            case "SCENE_16" -> Scene16Centauri.execute(state, null);
+            case "SCENE_17" -> Scene17Narn.execute(state, null);
+            case "SCENE_18" -> Scene18Wreck.execute(state, null);
+            case "SCENE_19" -> Scene19Transit.execute(state, null);
+            case "SCENE_20" -> Scene20CentauriAftermath.execute(state, null);
+            case "SCENE_21" -> Scene21NarnAftermath.execute(state, null);
+            case "SCENE_22" -> Scene22Lyta.execute(state, null);
+            case "SCENE_23" -> Scene23Mars.execute(state, null);
+            case "SCENE_24" -> Scene24MarsLab.execute(state, null);
+            case "SCENE_25" -> Scene25MarsEscape.execute(state, null);
 
             // --- ACT V GENEVA SHOWDOWN CORRIDOR (Szenen 26 bis 32) ---
             case "REUNION"  -> Scene26Reunion.execute(state, null);
