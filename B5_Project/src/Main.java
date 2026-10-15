@@ -9,7 +9,7 @@ public class Main {
         System.out.println("======================================================");
         System.out.println("=== THE SHADOWS WITHIN - OPERATION: TIMELINE START ===");
         System.out.println("======================================================");
-        
+
         // Startet sofort deine Prolog-Klasse (Die am Ende ihr "Press Enter" verlangt)
         Scene1Prologue.execute(scanner);
 
@@ -70,3 +70,25 @@ public class Main {
         Scene14Medlab.execute(state, scanner);
 
         // Rest der Main.java bleibt absolut unberührt (Scene15Hub und Finale)...
+
+
+        // --- THE STRATEGIC TRAVEL NODE ---
+        Scene15Hub.execute(state, scanner);
+
+        // --- THE ACT V GENEVA SHOWDOWN CORRIDOR ---
+        switch (state.currentScreen) {
+            case "FINALE" -> {
+                // Act IV Reunion & Act V Final Assault Execution
+                Scene26Reunion.execute(state, scanner);
+                Scene27GenevaApproach.execute(state, scanner);
+                Scene29GlassCeiling.execute(state, scanner);
+                Scene30FinalBattle.execute(state, scanner);
+                Scene31FinalBattleConclusion.execute(state, scanner);
+                Scene32Epilogue.execute(state, scanner);
+            }
+            default -> System.out.println("\n[SYSTEM]: Engine shut down regular or game over scenario reached.");
+        }
+
+        scanner.close();
+    }
+}
